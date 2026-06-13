@@ -94,8 +94,11 @@ button {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 18px 0;
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
+  
+  transition: transform 0.3s ease-in-out;
 }
+
 
 .brand {
   display: grid;
@@ -575,6 +578,11 @@ button {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
 }
+.skill-meter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .skill-card {
   position: relative;
@@ -628,6 +636,7 @@ button {
   display: block;
   height: 100%;
   border-radius: inherit;
+  justify-content: space-between;
   background: linear-gradient(90deg, var(--mint), var(--gold), var(--copper), var(--rose));
 }
 

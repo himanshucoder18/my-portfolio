@@ -27,7 +27,8 @@ import {
 } from 'lucide-react';
 import './styles.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const isDevelopment = import.meta.env.DEV;
+const API_BASE = import.meta.env.VITE_API_BASE_URL || (isDevelopment ? 'http://localhost:8080/api' : 'https://api-placeholder.com/api');
 
 const fallback = {
   profile: {
@@ -97,7 +98,7 @@ const fallback = {
     ['Java', 'Languages', 'java/java-original.svg', 92],
     ['JavaScript', 'Languages', 'javascript/javascript-original.svg', 84],
     ['Python', 'Languages', 'python/python-original.svg', 72],
-    ['C Programming', 'Languages', 'c/c-original.svg', 68],
+    ['C Programming', 'Languages', 'c/c-original.svg', 95],
     ['HTML5', 'Languages', 'html5/html5-original.svg', 86],
     ['CSS3', 'Languages', 'css3/css3-original.svg', 82],
     ['React.js', 'Frontend', 'react/react-original.svg', 88],
@@ -323,7 +324,7 @@ function LiveBackground() {
 
 function usePortfolioData() {
   const [data, setData] = useState(fallback);
-  const [apiStatus, setApiStatus] = useState('Loading API');
+  
 
   useEffect(() => {
     const endpoints = ['profile', 'projects', 'skills', 'experience', 'education', 'achievements'];
@@ -345,16 +346,16 @@ function usePortfolioData() {
           education,
           achievements
         });
-        setApiStatus('Live Spring Boot API');
+        
       })
-      .catch(() => setApiStatus('Preview data until API is running'));
+     
   }, []);
 
-  return { data, apiStatus };
+  return { data };
 }
 
 function App() {
-  const { data, apiStatus } = usePortfolioData();
+  const { data} = usePortfolioData();
   const [menuOpen, setMenuOpen] = useState(false);
   const [skillFilter, setSkillFilter] = useState('All');
   const [activeProject, setActiveProject] = useState(data.projects[0]?.id);
@@ -415,10 +416,7 @@ function App() {
         <main>
           <section id="home" className="hero section">
             <div className="hero-copy">
-              <div className="status-pill">
-                <Sparkles size={16} />
-                <span>{apiStatus}</span>
-              </div>
+              
               <p className="eyebrow">Final-year B.Tech CSE student</p>
               <h1>{data.profile.name}</h1>
               <h2>{data.profile.title}</h2>
@@ -469,7 +467,6 @@ function App() {
             <SectionHeading
               kicker="Selected builds"
               title="Projects with full-stack depth"
-              text="Scrollable, colorful project cards based on the exact work listed in the resume."
             />
             <div className="project-layout">
               <div className="project-tabs" role="tablist" aria-label="Project selector">
@@ -513,8 +510,8 @@ function App() {
           <section id="skills" className="section skills-section">
             <SectionHeading
               kicker="Tech stack"
-              title="Icons, categories, and practical confidence"
-              text="The skill grid is loaded through REST and grouped the way recruiters usually scan a fresher full-stack profile."
+              title="Skills and Technologies"
+              text="A snapshot of the languages, frameworks, and tools that showcase my expertise."
             />
             <div className="filter-row">
               {categories.map((category) => (
@@ -533,8 +530,12 @@ function App() {
                   <img src={skill.iconUrl} alt={`${skill.name} icon`} loading="lazy" />
                   <h3>{skill.name}</h3>
                   <p>{skill.category}</p>
+                  <div className="skill-meter-header">
+                      <span>Level</span>
+                      <span>{skill.level}%</span>
+                  </div>
                   <div className="skill-meter" aria-label={`${skill.name} level ${skill.level}%`}>
-                    <span style={{ width: `${skill.level}%` }} />
+                        <span style={{ width: `${skill.level}%` }} />
                   </div>
                 </article>
               ))}
@@ -545,7 +546,7 @@ function App() {
             <SectionHeading
               kicker="Journey"
               title="Internship, education, and proof of consistency"
-              text="A compact timeline for what you have done, where you studied, and the achievements that make the profile stronger."
+              text="A timeline of my experience, education, and achievements that demonstrate my growth and commitment to software engineering."
             />
             <div className="timeline-grid">
               <TimelineColumn icon={<BriefcaseBusiness />} title="Experience" items={data.experience} type="experience" />
@@ -566,7 +567,7 @@ function App() {
             <SectionHeading
               kicker="How this portfolio is built"
               title="React talks to Spring Boot, Spring Boot prepares MySQL data"
-              text="The app is intentionally built with the same stack you want to show recruiters."
+              text="A high-level overview of the architecture and technologies that power this portfolio, demonstrating my ability to build full-stack applications with a modern tech stack."
             />
             <div className="architecture">
               <FlowCard icon={<Code2 />} title="React UI" text="Live canvas background, scroll sections, filters, project switcher, and resume actions." />
@@ -637,7 +638,7 @@ function App() {
                 <span><MapPin size={18} />{data.profile.location}</span>
                 <a href="https://github.com/" target="_blank" rel="noreferrer"><Github size={18} />GitHub</a>
                 <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"><BookOpen size={18} />LinkedIn</a>
-                <span><CheckCircle2 size={18} />Resume updated to latest PDF</span>
+                
               </div>
             </div>
           </section>
