@@ -37,7 +37,7 @@ const fallback = {
     email: 'hkumar54321s@gmail.com',
     phone: '+91 6201340937',
     location: 'Dehradun, Uttarakhand',
-    resumeUrl: '/resume/Himanshu_Kumar_Thakur_Resume.pdf',
+    resumeUrl: '/resume/Resume_.pdf',
     summary:
       'Final-year B.Tech CSE student with experience building scalable web applications using Spring Boot, React.js, and REST APIs. Skilled in backend development, database design, and API integration, with strong foundations in Data Structures, OOP, and system design.',
     highlights: [
@@ -49,9 +49,31 @@ const fallback = {
   },
   projects: [
     {
-      id: 1,
+  id: 1,
+  title: 'Privacy-Aware Medical Image Analysis',
+  period: 'May 2026 - Jul 2026',
+  category: 'AI Healthcare',
+  accent: '#3b82f6',
+  description:
+    'An AI-powered web application for automated pneumonia detection from chest X-ray images with privacy-preserving deep learning and explainable AI features.',
+  techStack: [
+    'PyTorch',
+    'DenseNet121',
+    'CNN',
+    'Streamlit',
+    'Opacus',
+    'Grad-CAM'
+  ],
+  impact: [
+    'Built an AI-powered application for real-time pneumonia detection from chest X-ray images using PyTorch, DenseNet121/CNN, and Streamlit.',
+    'Integrated Differential Privacy (Opacus), confidence estimation, and Grad-CAM visual explanations to enhance patient data privacy and model transparency.',
+    'Designed and deployed a responsive healthcare dashboard with downloadable PDF diagnostic reports on Streamlit Community Cloud.'
+  ]
+},
+    {
+      id: 2,
       title: 'Sahi Raasta - AI-Powered Career Guidance Platform',
-      period: 'Mar 2026 - Current',
+      period: 'Mar 2026 - Apr 2026',
       category: 'AI career platform',
       accent: '#22c55e',
       description:
@@ -64,7 +86,7 @@ const fallback = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       title: 'Memory Allocator Simulator',
       period: 'Oct 2025 - Dec 2025',
       category: 'Operating systems visualizer',
@@ -79,7 +101,7 @@ const fallback = {
       ]
     },
     {
-      id: 3,
+      id: 4,
       title: 'Full-Stack Calorie Tracker',
       period: 'Apr 2025 - Jul 2025',
       category: 'Health tracking app',
@@ -339,7 +361,7 @@ function usePortfolioData() {
     )
       .then(([profile, projects, skills, experience, education, achievements]) => {
         setData({
-          profile: { ...profile, resumeUrl: '/resume/Himanshu_Kumar_Thakur_Resume.pdf' },
+          profile: { ...profile, resumeUrl: '/resume/Resume_.pdf' },
           projects,
           skills,
           experience,
